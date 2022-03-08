@@ -16,10 +16,6 @@ public class WebsiteCreator extends Thread{
         this.Allequipements = allEquipment;
     }
 
-    public synchronized void createAllAgent(List<User> users){
-
-    }
-
     public void run() {
         System.out.println(
                 "Thread " + Thread.currentThread().getId()
@@ -52,7 +48,6 @@ public class WebsiteCreator extends Thread{
         return html;
     }
 
-    //TODO: récupérer tout les équipements disponible sur le github
     private HashMap<String,String> getExistingEquipiement(){
         List<String> allEquipements = List.of(new String[]{"talky", "taser", "mousqueton", "lacrymo", "lampe", "cyno", "menottes", "brassard", "gants", "kit"});
         HashMap<String,String> listEquipements = new HashMap<String,String>();

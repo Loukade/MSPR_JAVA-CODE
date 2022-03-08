@@ -49,6 +49,7 @@ public class Main {
             }
         }
 
+        // Lancer le process de façon synchrone
         for (int j = 0; j < website.size(); j++) {
             WebsiteCreator current = website.get(j);
             current.start();
