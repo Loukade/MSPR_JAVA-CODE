@@ -1,5 +1,6 @@
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -58,9 +59,7 @@ public class WebsiteCreator extends Thread{
             for (String equipementDetaille: equipementComplet.split("\t")) {
                 temporaryList.add(equipementDetaille);
                 if(compteur == 1){
-                    ByteBuffer byteBuffer = StandardCharsets.UTF_8.encode(temporaryList.get(1));
-                    String utf8String = new String(byteBuffer.array(), StandardCharsets.UTF_8);
-                    listEquipements.put(temporaryList.get(0),utf8String);
+                    listEquipements.put(temporaryList.get(0), temporaryList.get(1));
                     compteur = 0;
                 }
                 compteur++;
@@ -102,6 +101,7 @@ public class WebsiteCreator extends Thread{
                 "<html xmlns=\"http://www.w3.org/1999/xhtml\">\n" +
                 "\n" +
                 "<head>\n" +
+                "    <meta charset='utf-8'>\n"+
                 "    <title>%agentname%</title>\n" +
                 "</head>\n" +
                 "\n" +
