@@ -24,7 +24,7 @@ public class WebsiteCreator {
     public void createAgentFile(User agent) {
         String html = configureAgentPage(agent);
         try {
-            FileWriter myWriter = new FileWriter("/Users/mathystheolade/Dev/EPSI/MSPR/GoSecuri/websites/" + agent.getNom() + ".html");
+            FileWriter myWriter = new FileWriter("./websites/" + agent.getNom() + ".html");
             myWriter.write(html);
             myWriter.close();
             System.out.println("Successfully wrote to the file.");
@@ -41,7 +41,7 @@ public class WebsiteCreator {
 
         html = html.replace("%agentname%", agent.getPrenom() + " " + agent.getNom());
         html = html.replace("%agentEquipments%", listOfEquipements);
-        html = html.replace("%logoImageLink%", "/Users/mathystheolade/Dev/EPSI/MSPR/GoSecuri/assets/img/logoGoSecuri.png");
+        html = html.replace("%logoImageLink%", "../assets/img/logoGoSecuri.png");
         html = html.replace("%userAgentPictureLink%", linkPicture);
         return html;
     }
