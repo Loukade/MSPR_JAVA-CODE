@@ -9,11 +9,12 @@ public class Main {
 
         HashMap<String,User> arrayListUser = new HashMap<String,User>();
         //String staff = git.ReadFile(new URL("https://raw.githubusercontent.com/Loukade/MSPR-JAVA/main/Staff/aboulet.txt"));
+        String Allequipements = git.ReadFile(new URL("https://raw.githubusercontent.com/Loukade/MSPR-JAVA/main/Staff/Outil/liste.txt"));
         String staff = git.ReadFile(new URL("https://raw.githubusercontent.com/Loukade/MSPR-JAVA/main/Staff/Personel/staff.txt"));
 
         for (String prenom : staff.split("\n")){
             URL currentStaffUrl = new URL("https://raw.githubusercontent.com/Loukade/MSPR-JAVA/main/Staff/"+prenom+".txt");
-            WebsiteCreator creator = new WebsiteCreator();
+            WebsiteCreator creator = new WebsiteCreator(Allequipements);
             User user = new User();
             Integer i = 0;
 
