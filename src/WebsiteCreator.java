@@ -7,13 +7,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class WebsiteCreator {
-    String Allequipements;
+public class WebsiteCreator extends Thread{
+    private String Allequipements;
+    private User agent;
 
-    public WebsiteCreator() {
-    }
-
-    public WebsiteCreator(String allEquipment) {
+    public WebsiteCreator(User agent, String allEquipment) {
+        this.agent = agent;
         this.Allequipements = allEquipment;
     }
 
@@ -21,10 +20,13 @@ public class WebsiteCreator {
 
     }
 
-    public void createAgentFile(User agent) {
-        String html = configureAgentPage(agent);
+    public void run() {
+        System.out.println(
+                "Thread " + Thread.currentThread().getId()
+                        + " is running");
+        String html = configureAgentPage();
         try {
-            FileWriter myWriter = new FileWriter("./websites/" + agent.getNom() + ".html");
+            FileWriter myWriter = new FileWriter("./websites/" + this.agent.getNom() + ".html");
             myWriter.write(html);
             myWriter.close();
             System.out.println("Successfully wrote to the file.");
@@ -32,14 +34,18 @@ public class WebsiteCreator {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
+
+        System.out.println(
+                "Thread " + Thread.currentThread().getId()
+                        + " is ended");
     }
 
-    private String configureAgentPage(User agent) {
+    private String configureAgentPage() {
         String html = createAgentHtmlPage();
         String linkPicture = "https://raw.githubusercontent.com/Loukade/MSPR-JAVA/6992f3206ce4c3490c92d7aa910fd73d6ca5de1f/Staff/Personel/CarteID/" + agent.getPrenom() + "" + agent.getNom() + ".png";
-        String listOfEquipements = this.configureEquipement(agent.getEquipements().getEquipements());
+        String listOfEquipements = this.configureEquipement(this.agent.getEquipements().getEquipements());
 
-        html = html.replace("%agentname%", agent.getPrenom() + " " + agent.getNom());
+        html = html.replace("%agentname%", this.agent.getPrenom() + " " + this.agent.getNom());
         html = html.replace("%agentEquipments%", listOfEquipements);
         html = html.replace("%logoImageLink%", "../assets/img/logoGoSecuri.png");
         html = html.replace("%userAgentPictureLink%", linkPicture);

@@ -1,20 +1,21 @@
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 
 public class Main {
     public static void main(String[] args) throws IOException {
         GitConnect git = new GitConnect();
 
-        HashMap<String,User> arrayListUser = new HashMap<String,User>();
+        List<WebsiteCreator> website = new ArrayList<WebsiteCreator>();
         //String staff = git.ReadFile(new URL("https://raw.githubusercontent.com/Loukade/MSPR-JAVA/main/Staff/aboulet.txt"));
         String Allequipements = git.ReadFile(new URL("https://raw.githubusercontent.com/Loukade/MSPR-JAVA/main/Staff/Outil/liste.txt"));
         String staff = git.ReadFile(new URL("https://raw.githubusercontent.com/Loukade/MSPR-JAVA/main/Staff/Personel/staff.txt"));
 
         for (String prenom : staff.split("\n")){
             URL currentStaffUrl = new URL("https://raw.githubusercontent.com/Loukade/MSPR-JAVA/main/Staff/"+prenom+".txt");
-            WebsiteCreator creator = new WebsiteCreator(Allequipements);
             User user = new User();
             Integer i = 0;
 
@@ -43,10 +44,15 @@ public class Main {
                         equipements.addEquipements(data);
                     }
                     user.setEquipements(equipements);
-                    arrayListUser.put(prenom,user);
-                    creator.createAgentFile(user);
+                    website.add((new WebsiteCreator(user,Allequipements)));
                 }
             }
         }
+
+        for (int j = 0; j < website.size(); j++) {
+            WebsiteCreator current = website.get(j);
+            current.start();
+        }
+
     }
 }
