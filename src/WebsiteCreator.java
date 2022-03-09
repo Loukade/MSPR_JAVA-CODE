@@ -22,6 +22,7 @@ public class WebsiteCreator extends Thread{
                 "Thread " + Thread.currentThread().getId()
                         + " is running");
         String html = configureAgentPage();
+
         try {
             FileWriter myWriter = new FileWriter("./websites/" + this.agent.getNom() + ".html");
             myWriter.write(html);
@@ -49,8 +50,23 @@ public class WebsiteCreator extends Thread{
         return html;
     }
 
+    public static void configureListAgentPage(String listeAgent) {
+        String html =  createListeAgentHtmlPage();
+        html = html.replace("%agentname%", listeAgent);
+        html = html.replace("%logoImageLink%", "../assets/img/logoGoSecuri.png");
+        try {
+            FileWriter myWriter = new FileWriter("./websites/index.html");
+            myWriter.write(html);
+            myWriter.close();
+        }
+        catch (Exception e)
+        {
+            System.out.println(e);
+        }
+
+    }
+
     private HashMap<String,String> getExistingEquipiement(){
-        List<String> allEquipements = List.of(new String[]{"talky", "taser", "mousqueton", "lacrymo", "lampe", "cyno", "menottes", "brassard", "gants", "kit"});
         HashMap<String,String> listEquipements = new HashMap<String,String>();
         int compteur = 0;
         for (String equipementComplet: this.Allequipements.split("\n")) {
@@ -108,7 +124,7 @@ public class WebsiteCreator extends Thread{
                 "<body>\n" +
                 "    <div class=\"navbar text-left\" style=\"background-color: #379EC1; color: white; justify-content:flex-start\">\n" +
                 "        <a class=\"navbar-brand\"><img src=\"%logoImageLink%\" style=\"width : 5em\"></a>\n" +
-                "        <a href=\"\" style=\"color:black\">Liste agents</a>\n" +
+                "        <a href=\"index.html\" style=\"color:black\">Liste agents</a>\n" +
                 "    </div>\n" +
                 "    <div class=\"container\">\n" +
                 "        <div class=\"row\">\n" +
@@ -132,6 +148,33 @@ public class WebsiteCreator extends Thread{
                 "            </div>\n" +
                 "        </div>\n" +
                 "    </div>\n" +
+                "</body>\n" +
+                "\n" +
+                "</html>";
+    }
+
+    public static String createListeAgentHtmlPage() {
+        return "<link href=\"https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css\" rel=\"stylesheet\"\n" +
+                "      integrity=\"sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC\" crossorigin=\"anonymous\" />\n" +
+                "<html xmlns=\"http://www.w3.org/1999/xhtml\">\n" +
+                "\n" +
+                "<head>\n" +
+                "    <meta charset='utf-8'>\n"+
+                "    <title>Liste D'Agents</title>\n" +
+                "</head>\n" +
+                "\n" +
+                "<body>\n" +
+                "    <div class=\"navbar text-left\" style=\"background-color: #379EC1; color: white; justify-content:flex-start\">\n" +
+                "        <a class=\"navbar-brand\"><img src=\"%logoImageLink%\" style=\"width : 5em\"></a>\n" +
+                "    </div>\n" +
+                "    <div class=\"container\">\n" +
+                "        <div class=\"row\">\n" +
+                "            <div class=\"col align-self-center\">\n" +
+                "                %agentname%\n" +
+                "\n" +
+                "\n" +
+                "            </div>\n" +
+                "        </div>\n" +
                 "</body>\n" +
                 "\n" +
                 "</html>";

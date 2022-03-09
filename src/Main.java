@@ -13,7 +13,7 @@ public class Main {
         //String staff = git.ReadFile(new URL("https://raw.githubusercontent.com/Loukade/MSPR-JAVA/main/Staff/aboulet.txt"));
         String Allequipements = git.ReadFile(new URL("https://raw.githubusercontent.com/Loukade/MSPR-JAVA/main/Staff/Outil/liste.txt"));
         String staff = git.ReadFile(new URL("https://raw.githubusercontent.com/Loukade/MSPR-JAVA/main/Staff/Personel/staff.txt"));
-
+        String listFinalUsers = "";
         for (String prenom : staff.split("\n")){
             URL currentStaffUrl = new URL("https://raw.githubusercontent.com/Loukade/MSPR-JAVA/main/Staff/"+prenom+".txt");
             User user = new User();
@@ -26,9 +26,11 @@ public class Main {
                     for (String data: details.split("\n")){
                         if (k == 0){
                             user.setNom(data);
+                            listFinalUsers += "<a href="+data+".html>"+ data + " &prenom&</a> <br/> \n\t";
                         }
                         if (k == 1){
                             user.setPrenom(data);
+                            listFinalUsers = listFinalUsers.replace("&prenom&", data );
                         }
                         if (k == 2){
                             user.setGrade(data);
@@ -54,6 +56,6 @@ public class Main {
             WebsiteCreator current = website.get(j);
             current.start();
         }
-
+        WebsiteCreator.configureListAgentPage(listFinalUsers);
     }
 }
