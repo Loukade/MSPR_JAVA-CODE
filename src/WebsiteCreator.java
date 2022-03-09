@@ -116,6 +116,11 @@ public class WebsiteCreator extends Thread{
                 "<head>\n" +
                 "    <meta charset='utf-8'>\n"+
                 "    <title>%agentname%</title>\n" +
+                "    <style>\n" +
+                "        *{\n" +
+                "            font-family: \"Roboto\" !important;\n" +
+                "        }\n" +
+                "    </style> "+
                 "</head>\n" +
                 "\n" +
                 "<body>\n" +
@@ -158,6 +163,11 @@ public class WebsiteCreator extends Thread{
                 "<head>\n" +
                 "    <meta charset='utf-8'>\n"+
                 "    <title>Liste D'Agents</title>\n" +
+                "    <style>\n" +
+                "        *{\n" +
+                "            font-family: \"Roboto\" !important;\n" +
+                "        }\n" +
+                "    </style> "+
                 "</head>\n" +
                 "\n" +
                 "<body>\n" +
@@ -174,6 +184,22 @@ public class WebsiteCreator extends Thread{
                 "        </div>\n" +
                 "</body>\n" +
                 "\n" +
+                "<script>\n" +
+                "\n" +
+                "    var bol = false;\n" +
+                "    while(bol == false){\n" +
+                "        let foo = prompt('Utilisateur');\n" +
+                "        if (foo =='admin'){\n" +
+                "            let bar = prompt('Mot de passe');\n" +
+                "            if (bar == 'admin'){\n" +
+                "                alert('Vous êtes connecté');\n" +
+                "                (document.getElementById('leBody')).style.opacity = 1;\n" +
+                "                bol = true;\n" +
+                "\n" +
+                "            }\n" +
+                "        }\n" +
+                "    }\n" +
+                "</script>"+
                 "</html>";
     }
 
