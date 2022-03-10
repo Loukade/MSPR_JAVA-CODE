@@ -42,7 +42,7 @@ public class WebsiteCreator extends Thread{
 
         html = html.replace("%agentname%", this.agent.getPrenom() + " " + this.agent.getNom());
         html = html.replace("%agentEquipments%", listOfEquipements);
-        html = html.replace("%logoImageLink%", "../assets/img/logoGoSecuri.png");
+        html = html.replace("%logoImageLink%", "logoGoSecuri.png");
         html = html.replace("%userAgentPictureLink%", linkPicture);
         return html;
     }
@@ -50,7 +50,7 @@ public class WebsiteCreator extends Thread{
     public static void configureListAgentPage(String listeAgent) {
         String html =  createListeAgentHtmlPage();
         html = html.replace("%agentname%", listeAgent);
-        html = html.replace("%logoImageLink%", "../assets/img/logoGoSecuri.png");
+        html = html.replace("%logoImageLink%", "logoGoSecuri.png");
         try {
             FileWriter myWriter = new FileWriter("./websites/index.html");
             myWriter.write(html);
